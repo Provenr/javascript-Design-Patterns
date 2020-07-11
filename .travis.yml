@@ -2,23 +2,23 @@ language: node_js
 node_js: 12.14.1
 env:
   global:
-  - host: 119.3.215.227
+    - G_HOST=119.3.215.227
 cache:
   apt: true
   directories:
   - node_modules
 before_install:
-    - openssl aes-256-cbc -K $encrypted_0a90c2cd1bd8_key -iv $encrypted_0a90c2cd1bd8_iv
-    -in id_rsa_gitlab.enc -out ~/.ssh/id_rsa_gitlab -d
+  - openssl aes-256-cbc -K $encrypted_0a90c2cd1bd8_key -iv $encrypted_0a90c2cd1bd8_iv
+  -in id_rsa_gitlab.enc -out ~/.ssh/id_rsa_gitlab -d
 install:
-- npm install -g gitbook-cli
-- gitbook install
+  - npm install -g gitbook-cli
+  - gitbook install
 script:
-- echo 初始化文件...
-- echo 正在生成静态文件...
-- gitbook build
+  - echo 初始化文件...
+  - echo 正在生成静态文件...
+  - gitbook build
 after_success:
-- cd ./_book/
-- echo 准备移动至指定文件夹到服务器...
-- travis_wait 30 scp -o stricthostkeychecking=no -rC ./* root@${host}:/root/provenr-local/javascript-design-pattern
+  - cd ./_book/
+  - echo 准备移动至指定文件夹到服务器...
+  - travis_wait 30 scp -o stricthostkeychecking=no -rC ./* root@${G_HOST}:/root/provenr-local/javascript-design-pattern
 
