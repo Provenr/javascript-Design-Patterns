@@ -1,23 +1,24 @@
-# Designated language
 language: node_js
-
-# Specify the node version.
 node_js: 12.14.1
-
-# Environment variables
 env:
   global:
-    - GitHub_REF: git@github.com:Provenr/javascript-Design-Patterns.git
-    - secure: pGa+eNum9HaG6EgqhTr4ISymS0rlsYdpIDDfZJFw1LlY+Yz4cy7sHmqW7FfkBUfMUq0a/xvK5zSUeO6ABk77ER2q+BaGMx9oFq5M7J0GrPPXKRIPsNidiUub8UweyR91wGU2z2qcxcO5FYVhBw+CIvcfyXxza88RH/URqEcyYsPweruDW7ohseKFuxUb4h/FRxvTe2IPyL2bZZ6R9fnslvf+95m05IclHl01DLKq2ToEXjKIPaBtPj8bwMAXZfAPY3OTjPNb4RV0RJSMvREIAaNHupkgVhVvLJZ/idmM39V66WWUTl0jKDeJVRMDhDlTsyfzZI4wTgLXV2x9McWQ450vhDSXGqWT7AVt4OVKgX5oCjivRET3gqqdS3y+j930gyjf7HbfsazDO0c/Z9si3zXBCZbSruuvkxZs3qB9T7cRo2FqZPUJW9GdFsP2usWjIjftqvGmy56W5kAC7h7/vgfRlNyUBbLzJGotReFUELfMxJYk31HgG0O61g7ziBAEnFJ7VOvTPXE29maX5Vdl/4tg5lUw0KnyBTRLk37VgdxMzOA9uiwY4g3GrKKxKUnAZCog+SclnbmwveNGm/IcbDlTBGIoHwmUQE7u7zuxm2D4x2Gp1YG3ti1PCs43UKWLyobuscs7PcYcQ7AhYyPW+wBAaOdlsMHCB4ZLo2OCKaQ=
+  - host: 119.3.215.227
 cache:
   apt: true
   directories:
-    - node_modules
+  - node_modules
+before_install:
+    - openssl aes-256-cbc -K $encrypted_0a90c2cd1bd8_key -iv $encrypted_0a90c2cd1bd8_iv
+    -in id_rsa_gitlab.enc -out ~/.ssh/id_rsa_gitlab -d
 install:
-  - npm install -g gitbook-cli
-  - gitbook install
+- npm install -g gitbook-cli
+- gitbook install
 script:
-  - echo 初始化文件...
-  - echo 正在生成静态文件...
-  - gitbook build
+- echo 初始化文件...
+- echo 正在生成静态文件...
+- gitbook build
 after_success:
+- cd ./_book/
+- echo 准备移动至指定文件夹到服务器...
+- travis_wait 30 scp -o stricthostkeychecking=no -rC ./* root@${host}:/root/provenr-local/javascript-design-pattern
+
