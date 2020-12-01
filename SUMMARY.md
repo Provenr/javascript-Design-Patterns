@@ -4,7 +4,7 @@
 
 * [基础知识](基础知识/README.md)
     * [面向对象](基础知识/面向对象.md)
-    * [this、call、apply](基础知识/this、call、apply.md)
+    * [this、bind、call、apply](基础知识/this、bind、call、apply.md)
     * [闭包和高阶函数](基础知识/闭包和高阶函数.md)
 * [设计模式](设计模式/README.md)
     * [工厂模式](设计模式/工厂模式.md)
