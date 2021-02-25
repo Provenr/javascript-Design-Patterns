@@ -1,10 +1,10 @@
-## this、call、apply、bind 异同
+# this、call、apply、bind 异同
 
 相同点：
 
 1、bind、call`和`apply`的第一个参数`thisArg`，都是`func`运行时指定的`this（改变 this 指向）
 
-2、call`和`apply在非严格模式下，则指定为 null 或 undefined 时会自动替换为指向全局对象、值为原始值(数字，字符串，布尔值)的`this`会指向该原始值的自动包装对象。
+2、call`和`apply 在非严格模式下，则指定为 null 或 undefined 时会自动替换为指向全局对象、值为原始值(数字，字符串，布尔值)的`this`会指向该原始值的自动包装对象。
 
 不同点：
 
@@ -15,29 +15,29 @@
 ## call 实现
 
 ```javascript
-Function.prototype.call2 = function(context) {
+Function.prototype.call2 = function (context) {
   // 改变this , 注意context 为 null | undefined 的情况
   // 非严格模式下，则指定为 null 或 undefined 时会自动替换为指向全局对象
   var context = context || window;
   context.fn = this; // 实例绑定到上下文
-  
+
   // 获取参数
   var args = [];
-  for(var i = 1, len = arguments.length; i < len; i++) {
-      args.push('arguments[' + i + ']');
+  for (var i = 1, len = arguments.length; i < len; i++) {
+    args.push("arguments[" + i + "]");
   }
   // 立即执行函数
   // var result = eval('context.fn(' + args +')');
   var result = context.fn(...args);
 
-  delete context.fn
+  delete context.fn;
   return result;
-}
+};
 ```
 
 ## apply 实现
 
-```
+```javascript
 Function.prototype.apply2 = function(context, arr) {
   // 改变this
   // 如果这个函数处于非严格模式下，则指定为null和undefined的this值会自动指向全局对象(浏览器中就是window对象, node就是global)，
@@ -62,11 +62,9 @@ Function.prototype.apply2 = function(context, arr) {
 
 ```
 
-
-
 ## Bind 实现
 
-```
+```javascript
 Function.prototype.bind2 = function (context) {
 
     if (typeof this !== "function") {
@@ -79,7 +77,7 @@ Function.prototype.bind2 = function (context) {
 
     var fNOP = function () {};
 
-    // 在 bind 的时候，只传一部分参数，在执行返回的函数的时候，再传另外的参数 
+    // 在 bind 的时候，只传一部分参数，在执行返回的函数的时候，再传另外的参数
     var fBound = function () {
         // 这个时候的arguments是指bind返回的函数传入的参数
         var bindArgs = Array.prototype.slice.call(arguments);
@@ -94,4 +92,3 @@ Function.prototype.bind2 = function (context) {
 
 }
 ```
-
