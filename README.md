@@ -15,8 +15,8 @@
 
 ## 基础知识
 
-- [javascript 面向对象](/基础知识/javascript面向对象.html)
-- [this、apply、call](/基础知识/this、apply、call.html)
+- [javascript 面向对象](/基础知识/面向对象.html)
+- [this、bind、call、apply](/基础知识/this、bind、call、apply.html)
 - [闭包和高阶函数](/基础知识/闭包和高阶函数.html)
 
 ## 设计模式
