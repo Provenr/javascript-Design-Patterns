@@ -52,7 +52,7 @@
 - [单一职责原则 Single Responsibility Principle](/单一职责原则.html)
 - [最少知识原则 Least Knowledge Principle](/最少知识原则.html)
 - [开放-封闭原则 Open-Closed Principle](/开放-封闭原则.html)
-- [接口和面向接口编程](/接口和面向接口编程.html)
+- [依赖倒置原则](/依赖倒置原则.html)
 - [代码重构](/代码重构.html)
 
 ## 补充文档
